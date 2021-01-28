@@ -4,15 +4,21 @@ from PIL import Image
 import base64
 from random import randrange
 
+# Page title
 st.markdown("""
 # Avatar Maker
 
 This app allows you to build your own custom avatars based on modular templates provided herein.
 
+**Credits**
+- App built in `Python` + `Streamlit` by [Chanin Nantasenamat](https://medium.com/@chanin.nantasenamat) (aka [Data Professor](http://youtube.com/dataprofessor))
+- App inspired by the [avataaars generator](https://getavataaars.com) by [Fang-Pen Lin](https://twitter.com/fangpenlin)
+- Built with [py_avataaars](https://pypi.org/project/py-avataaars/) library by [Krzysztof Ebert](https://github.com/kebu)
+- Avatar is based on Sketch library [Avataaars](https://avataaars.com) designed by [Pablo Stanley](https://twitter.com/pablostanley).
 ---
 """)
 
-# Sidebars
+# Sidebar menu for customizing the avatar
 st.sidebar.header('Customize your avatar')
 
 option_style = st.sidebar.selectbox('Style', ('CIRCLE', 'TRANSPARENT'))
@@ -80,6 +86,8 @@ else:
 option_skin_color = st.sidebar.selectbox('Skin color',
                                          list_skin_color,
                                          index = index_skin_color )
+
+st.sidebar.subheader('Head top')
 option_top_type = st.sidebar.selectbox('Head top',
                                         list_top_type,
                                         index = index_top_type)
@@ -89,6 +97,8 @@ option_hair_color = st.sidebar.selectbox('Hair color',
 option_hat_color = st.sidebar.selectbox('Hat color',
                                          list_hat_color,
                                          index = index_hat_color)
+
+st.sidebar.subheader('Face')
 option_facial_hair_type = st.sidebar.selectbox('Facial hair type',
                                                 list_facial_hair_type,
                                                 index = index_facial_hair_type)
@@ -104,6 +114,8 @@ option_eye_type = st.sidebar.selectbox('Eye type',
 option_eyebrow_type = st.sidebar.selectbox('Eyebrow type',
                                             list_eyebrow_type,
                                             index = index_eyebrow_type)
+
+st.sidebar.subheader('Clothe and accessories')
 option_accessories_type = st.sidebar.selectbox('Accessories type',
                                                 list_accessories_type,
                                                 index = index_accessories_type)
@@ -117,7 +129,7 @@ option_clothe_graphic_type = st.sidebar.selectbox('Clothe graphic type',
                                                    list_clothe_graphic_type,
                                                    index = index_clothe_graphic_type)
 
-# Avatar function
+# Creating the Avatar
 # options provided in https://github.com/kebu/py-avataaars/blob/master/py_avataaars/__init__.py
 avatar = pa.PyAvataaar(
     #style=pa.AvatarStyle.CIRCLE,
@@ -138,6 +150,7 @@ avatar = pa.PyAvataaar(
     clothe_graphic_type=eval('pa.ClotheGraphicType.%s' %option_clothe_graphic_type)
 )
 
+# Custom function for encoding and downloading avatar image
 def imagedownload(filename):
     image_file = open(filename, 'rb')
     b64 = base64.b64encode(image_file.read()).decode()  # strings <-> bytes conversions
@@ -145,18 +158,7 @@ def imagedownload(filename):
     return href
 
 st.subheader('**Rendered Avatar**')
-
 rendered_avatar = avatar.render_png_file('avatar.png')
 image = Image.open('avatar.png')
 st.image(image)
-
 st.markdown(imagedownload('avatar.png'), unsafe_allow_html=True)
-
-st.markdown("""
----
-### **Credits**
-- App built in `Python` + `Streamlit` by [Data Professor](http://youtube.com/dataprofessor)
-- App inspired by the [avataaars generator](https://getavataaars.com) by [Fang-Pen Lin](https://twitter.com/fangpenlin)
-- Built with [py_avataaars](https://pypi.org/project/py-avataaars/) library by [Krzysztof Ebert](https://github.com/kebu)
-- Avatar is based on Sketch library [Avataaars](https://avataaars.com) designed by [Pablo Stanley](https://twitter.com/pablostanley).
-""")
