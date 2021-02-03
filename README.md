@@ -36,6 +36,11 @@ Pip install libraries
 pip install -r requirements.txt
 ```
 
+Install libcairo2
+```
+sudo apt-get install libcairo2
+```
+
 ###  Launch the app
 
 ```
