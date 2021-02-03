@@ -1,5 +1,5 @@
 streamlit==0.71.0
-py_avataaars==1.0.2
+py-avataaars==1.0.2
 pillow==8.0.1
 base58==2.0.1
 pycairo
