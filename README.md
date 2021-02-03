@@ -1,5 +1,11 @@
 # avatar-app
 
+# Watch the tutorial video
+
+Machine Learning Hyperparameter Optimizer App (Streamlit + Scikit-learn + Python)
+
+<a href="https://youtu.be/4UCfxvURjgI"><img src="http://img.youtube.com/vi/4UCfxvURjgI/0.jpg" alt="How to build an Avatar maker app | Streamlit #18" title="How to build an Avatar maker app | Streamlit #18" width="400" /></a>
+
 # Demo
 
 [Demo of this web app]().
